@@ -1,60 +1,69 @@
-import React, { useState } from "react";
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const Arrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+    className={className}
+    style={{
+      ...style,
+      display: "block",
+      paddingTop: "10px",
+      background: "#0EC6B5",
+      borderRadius: "100%",
+      height: "40px",
+      width: "40px",
+      textAlign: "center",
+      zIndex: "1",
+      marginLeft:"30px",
+      marginRight:"30px",
+    }}
+      onClick={onClick}
+    />
+  );
+};
 
 const Slider2 = () => {
-  const images=["https://klbtheme.com/groci/wp-content/uploads/2018/08/slider2.jpg",
-                "https://klbtheme.com/groci/wp-content/uploads/2018/08/slider1.jpg"
-  ]
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const interval= setInterval(() => {
-    setCurrentIndex(currentIndex+1)
-    if(currentIndex==1)
-    {
-      setCurrentIndex(0)
-    }
-  }, 3000);
-
-  const prev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+  const settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 400,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    nextArrow: <Arrow />,
+    prevArrow: <Arrow />,
   };
 
-  const next = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  const images = [
+    "https://klbtheme.com/groci/wp-content/uploads/2018/08/slider2.jpg",
+    "https://klbtheme.com/groci/wp-content/uploads/2018/08/slider1.jpg",
+  ];
 
-  
   return (
-    <>
-      <div className="w-full">
-        <div className="relative w-full flex items-center justify-center">
-          {/* Here is our slider images code  */}
-
-          <div className="w-full xl:w-[78%]">
-            <a className="w-full" href="#">
-                <img className="w-full xl:h-[400px]"   src={images[currentIndex]} alt="" />
-                
-            </a>
-          </div>
-        {/* icon div start here  */}
-          <div className="w-full p-5 absolute flex justify-between">
-            {/* // left scroll icon  */}
-            <button onClick={prev} className="h-10 w-10  text-white bg-[#0EC6B5] rounded-full hover:bg-black hover:transition-transform duration-300 hover:scale-110">
-              <ion-icon name="chevron-back-outline"></ion-icon>
-            </button>
-
-            {/* //right icon  */}
-            <button onClick={next} className="h-10 w-10  text-white bg-[#0EC6B5] rounded-full hover:bg-black hover:transition-transform duration-300 hover:scale-110">
-              <ion-icon name="chevron-forward-outline"></ion-icon>
-            </button>
-          </div>
-          {/* Ends icons div  */}
-
-        </div>
+    <div className="w-full flex justify-center">
+      <div className="w-[98%] object-contain overflow-hidden">
+        <Slider {...settings}>
+          {images.map((item, ind) => (
+            <div key={ind} className="w-[100%]">
+              <div className="w-[100%] flex justify-center items-center">
+                <div className="w-[80%]">
+                  <img
+                    className="w-[100%] max-h-[400px]"
+                    src={item}
+                    alt={`Slide ${ind + 1}`}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
       </div>
-    </>
+    </div>
   );
 };
 

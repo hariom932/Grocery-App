@@ -1,6 +1,62 @@
 import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+const Slider1 = () =>
+  {
+  function Arrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          paddingTop: "10px",
+          background: "#0EC6B5",
+          borderRadius: "100%",
+          height: "40px",
+          width: "40px",
+          textAlign: "center",
+          zIndex: "1",
+        }}
+        onClick={onClick}
+      />
+    );
+  }
 
-const Slider1 = () => {
+  var settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 8,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    autoplay: true,
+    speed: 200,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    nextArrow: <Arrow />,
+    prevArrow: <Arrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      }
+    ],
+  };
   const items = [
     {
       name: "Peace",
@@ -78,49 +134,28 @@ const Slider1 = () => {
 
   return (
     <>
-      <div>
-        <div className="relative">
-          <div className="flex h-45 w-full space-x-4 px-4 py-6 justify-center items-center">
-         
-         
-            {/* // left scroll icon  */}
-            <button className="h-10 w-10 flex items-center justify-center text-white bg-[#0EC6B5] rounded-full hover:bg-black hover:transition-transform duration-300 hover:scale-110">
-              <ion-icon name="chevron-back-outline"></ion-icon>
-            </button>
-
-            {/* // code for all images to get from array */}
-            <div className=" flex items-center h-45 w-[74%] overflow-hidden">
-              <div className="flex space-x-4 p-4 hide-scrollbar ">
-                {items.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center justify-center min-w-[100px] text-center"
-                  >
-                    {/* here, is our image url  */}
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center mb-2">
-                      <img
-                        src={item.imageUrl}
-                        alt={item.name}
-                        className="w-full h-full rounded-full object-cover"
-                      />
+      <div className="my-10">
+        <div className="w-full flex justify-center items-center">
+          <div className="slider-container w-[74%]">
+            <Slider {...settings}>
+              {items.map((item, ind) => (
+                <div className="">
+                  <div className="flex justify-center items-center flex-col gap-2">
+                    <div className="h-20 w-20 items-center">
+                      <div className="border border-gray-100 rounded-full overflow-hidden flex justify-center shadow-sm">
+                      <img className="w-16 h-18" src={item.imageUrl} alt="" />
+                      </div>
                     </div>
-                    <div className="text-sm font-semibold text-gray-800 truncate w-full">
+                    <div className="text-sm font-semibold text-gray-800 truncate w-full text-center">
                       {item.name}
-                    </div>{" "}
+                    </div>
                     <div className="text-xs text-gray-600">
                       {item.items} Items
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* //right icon  */}
-            <div>
-              <button className="h-10 w-10 flex items-center justify-center text-white bg-[#0EC6B5] rounded-full hover:bg-black hover:transition-transform duration-300 hover:scale-110">
-                <ion-icon name="chevron-forward-outline"></ion-icon>
-              </button>
-            </div>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       </div>

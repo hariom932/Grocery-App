@@ -1,18 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./product";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
+
+const Arrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        paddingTop: "10px",
+        background: "#0EC6B5",
+        borderRadius: "100%",
+        height: "40px",
+        width: "40px",
+        textAlign: "center",
+        zIndex: "1",
+        marginLeft: "5px",
+        marginRight: "5px",
+        cursor: "pointer",
+      }}
+      onClick={onClick}
+    />
+  );
+};
 
 const Grocery = () => {
-  var settings = {
-    dots: true,
+  const settings = {
     infinite: true,
-    speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
+    autoplay: true,
+    speed: 400,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    nextArrow: <Arrow />,
+    prevArrow: <Arrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+    ],
   };
-
   const images = [
     {
       name: "Organic Sweet Corn",
@@ -80,13 +135,58 @@ const Grocery = () => {
     },
   ];
 
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState([]);
+
+  // -----------------Home API  start here--------------------
+  useEffect(() => {
+    const homeApi = async () => {
+      try {
+        const response = await axios.get(import.meta.env.VITE_HOME_URL);
+        console.log(response.data);
+        setProducts(response.data.data);
+      } catch (error) {
+        console.error("API Error:", error);
+      }
+    };
+    homeApi();
+  }, []);
+
+  // This is i am displaying in console you can use from the product whenever you want
+  useEffect(() => {
+    if (products?.recentProduct) {
+      console.log(
+        "this is postman products Use these product to the place of images array to display it "
+      );
+      products.recentProduct.map((item) => console.log(item));
+    }
+  }, [products]);
+
+  // --------------------------Home API End here ------------------
+  // --------------------------Category API Start here ------------------
+  useEffect(() => {
+
+    const categoryApi = async () => {
+      try {
+        const responseData = await axios.get(import.meta.env.VITE_CATEGORY_URL);
+        console.log("This is our category which is getting from postman api")
+        console.log(responseData.data);
+        setCategory(responseData.data.data);
+      } catch (error) {
+        console.error("API Error:", error);
+      }
+    };
+    categoryApi();
+  }, []);
+  // --------------------------Category API End here --------------------
+
   return (
     <>
-      <div className="mt-15 pb-9 pt-12 bg-[#EFF7FA] ">
+      <div className="pb-9 pt-12 bg-[#EFF7FA] ">
         {/* -------------text-------------- */}
         <div className="w-full flex justify-center">
-          <div className="w-[72%] flex justify-between ">
-            <p className="text-[17px]">
+          <div className="w-[72%] flex justify-between word-spacing-wide">
+            <p className="text-[17px] font-medium">
               Top Savers Today
               <span className="text-white text-[13px] rounded-xs ml-1 px-1.5 bg-[#007BFF]">
                 20% OFF
@@ -104,7 +204,7 @@ const Grocery = () => {
           </div>
         </div>
         {/* 2 Backgrownd image  */}
-        <div className="w-full mt-10 justify-center flex items-center md:flex-row">
+        <div className="w-full mt-8 justify-center flex items-center md:flex-row">
           <div className=" w-[80%] flex flex-col justify-center items-center md:flex-row">
             <div className="object-cover">
               <img
@@ -125,9 +225,9 @@ const Grocery = () => {
         {/* second text (Best view)  */}
         <div className="mt-10">
           <div className="w-full flex justify-center">
-            <div className="w-[72%] flex justify-between ">
+            <div className="w-[73%] flex justify-between ">
               <p className="text-[17px] font-medium">
-                Top Savers Today
+                Best Offers View
                 <span className="text-white text-[13px] rounded-xs ml-1 px-1.5 py-0.7 bg-[#007BFF]">
                   20% OFF
                 </span>
@@ -138,38 +238,79 @@ const Grocery = () => {
           {/* second text end here (Best view)  */}
         </div>
 
-        {/* second slider down of best view  */}
-        <div className="flex justify-center items-center w-full relative">
-          <div className="w-[73%] container mx-auto flex overflow-x-auto hide-scrollbar gap-2">
-            {images.map((item, ind) => (
-              <Product key={ind} item={item} />
-            ))}
-          </div>
-          {/* icon div start here  */}
-          <div className="w-[78%] p-5 absolute flex justify-between">
-            {/* // left scroll icon  */}
-            <button className="h-10 w-10  text-white bg-[#0EC6B5] rounded-full hover:bg-black hover:transition-transform duration-300 hover:scale-110">
-              <ion-icon name="chevron-back-outline"></ion-icon>
-            </button>
+        {/* Second slider down of best view  */}
+    <div className="w-full content-fit flex justify-center">
+        <div className=" container mt-5 flex justify-center items-center">
+          <div className="container w-[86%]">
+            <Slider {...settings}>
+              {images.map((item, ind) => (
+                <div className="container h-[400px] flex gap-2 border border-gray-200 bg-white">
+                  <div className="flex justify-between text-[11px] text-green-500 px-6 pt-5 z-10">
+                    <p className="">17%</p>
+                    <span className="h-5 w-5 border border-green-400 rounded-xs flex justify-center items-center">
+                      <div className="h-2 w-2 bg-green-500 rounded-full "></div>
+                    </span>
+                  </div>
+                  <div className="h-[100%] p-2 flex justify-center items-center flex-col">
+                    <div className="overflow-hidden h-40 object-cover -mt-12">
+                      <img
+                        className="h-45 w-45 -mt-6 transition-all duration-500 transform opacity-100 hover:scale-110 "
+                        src={item.image}
+                        alt=""
+                      />
+                    </div>
+                    <p className=" text-[#0CC5B7] font-bold">{item.name}</p>
+                    <div className="font-bold text-sm text-gray-400">
+                      In stock -<span className="font-medium">1 kg</span>
+                    </div>
+                    <span className="font-bold text-sm text-gray-400 mt-5">
+                      <span>
+                        <del>$10.00 </del>
+                      </span>
+                      <span className="font-bold text-black">
+                        $ {item.price}
+                      </span>
+                    </span>
 
-            {/* //right icon  */}
-            <button className="h-10 w-10  text-white bg-[#0EC6B5] rounded-full hover:bg-black hover:transition-transform duration-300 hover:scale-110">
-              <ion-icon name="chevron-forward-outline"></ion-icon>
-            </button>
+                    {/* ----------------quantity update button-----------s */}
+
+                    <div className="h-11 mt-4 w-25 bg-[#FFF1F0] rounded-full flex justify-around items-center text-gray-500 md:w-35">
+                      <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center">
+                        -
+                      </button>
+                      <p>1</p>
+                      <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center">
+                        +
+                      </button>
+                    </div>
+                    {/* ----------------quantity update button end here-----------s */}
+
+                    {/* ---------add to cart btn-----  */}
+                    <button className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
+                      <ion-icon className="" name="cart-outline"></ion-icon>{" "}
+                      <p>Add to cart</p>
+                    </button>
+                    {/* ---------add to cart btn end here-----  */}
+                  </div>
+                </div>
+              ))}
+            </Slider>
           </div>
-          {/* Ends icons div  */}
         </div>
-        {/* second slider down of best view end here */}
+        {/* Second slider down of best view end here */}
       </div>
-        {/* -------3 icons  */}
-        <div className="pb-9 border-b border-b-gray-200">
+      </div>
+
+      {/* -------3 icons  */}
+
+      <div className="pb-9 border-b border-b-gray-200">
         <div className="w-full flex justify-center items-center">
           <div className="mt-10 w-[85%] grid gap-2 md:grid-cols-3 lg:w-[75%]">
             <div className="flex gap-3 items-center object-fill ">
               <div>
                 <div className="h-16 w-16 rounded-full border flex justify-center items-center border-[#24A3B5]">
                   <ion-icon
-                    className="text-[#24A3B5]"
+                    className="text-[#24A3B5] text-2xl"
                     name="pricetags"
                   ></ion-icon>
                 </div>
@@ -178,53 +319,57 @@ const Grocery = () => {
                 <h6 className="font-medium text-[#24A3B5]">
                   Free and Next Day Delivery
                 </h6>
-                <p className="text-gray-00">
+                <p className="text-gray-400">
                   Lorem ipsum dolor sit amet consectetur.
                 </p>
               </div>
             </div>
+
             {/* second icon  */}
             <div className="flex gap-3 items-center">
-            <div>
+              <div>
                 <div className="h-16 w-16 rounded-full border flex justify-center items-center border-[#24A3B5]">
                   <ion-icon
-                    className="text-[#24A3B5]"
-                    name="pricetags"
+                    className="text-[#24A3B5] text-2xl"
+                    name="basket"
                   ></ion-icon>
                 </div>
               </div>
               <div>
                 <h6 className="font-medium text-[#24A3B5]">
-                  Free and Next Day Delivery
+                100% Satisfaction Guarantee
                 </h6>
-                <p className="text-gray-00">
-                  Lorem ipsum dolor sit amet consectetur.
+                <p className="text-gray-400">
+                100% Satisfaction Guarantee
+                et, cons...
                 </p>
               </div>
             </div>
+
             {/* third icon  */}
             <div className="flex gap-3 items-center">
-            <div>
+              <div>
                 <div className="h-16 w-16 rounded-full border flex justify-center items-center border-[#24A3B5]">
                   <ion-icon
-                    className="text-[#24A3B5]"
+                    className="text-[#24A3B5] text-2xl"
                     name="pricetags"
                   ></ion-icon>
                 </div>
               </div>
               <div>
                 <h6 className="font-medium text-[#24A3B5]">
-                  Free and Next Day Delivery
+                Great Daily Deals Discount
                 </h6>
-                <p className="text-gray-00">
+                <p className="text-gray-400">
                   Lorem ipsum dolor sit amet consectetur.
                 </p>
               </div>
             </div>
           </div>
-          </div>
-          {/* -------3 icons end here */}
         </div>
+        {/* -------3 icons end here */}
+      </div>
+      {/* last 3 icon end here  */}
     </>
   );
 };

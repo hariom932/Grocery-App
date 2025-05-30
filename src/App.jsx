@@ -4,23 +4,7 @@ import Routing from './components/Routing'
 import axios from 'axios'
 
 function App() {
- 
-    const [data,setData]=useState([]);
-
-    const getData=async()=>
-    {
-        const row=await axios.get(("https://api.getpostman.com/me"))
-        const info=await row.json()
-        setData(info)
-    }
-    useEffect(()=>{
-        getData()
-        console.log((data));
-        
-    },[])
-    
-
-  return (
+   return (
     <>
       <Routing/>
     </>
