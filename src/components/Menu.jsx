@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Home from "./Home";
-import About from "../assets/mainPages/About";
-import Faqs from "../assets/mainPages/Faqs";
-import Contact from "../assets/mainPages/Contact";
-import Shop from "../assets/mainPages/Shop";
+import About from "../mainPages/About";
+import Faqs from "../mainPages/Faqs";
+import Contact from "../mainPages/Contact";
+import Shop from "../mainPages/Shop";
 
 const Menu = () => {
   return (

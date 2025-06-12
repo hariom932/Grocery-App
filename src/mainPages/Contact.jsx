@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Menu from "../../components/Menu";
-import Footer1 from "../../components/Footer1";
-import Footer2 from "../../components/Footer2";
-import FooterLast from "../../components/FooterLast";
+import Navbar from "../header/Navbar";
+import Menu from "../components/Menu";
+import Footer1 from "../footer/Footer1";
+import Footer2 from "../footer/Footer2";
+import FooterLast from "../footer/FooterLast";
 
 const Contact = () => {
   return (

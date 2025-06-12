@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Menu from "./Menu";
-import Navbar from "./Navbar";
-import Footer1 from "./Footer1";
-import FooterLast from "./FooterLast";
+import Navbar from "../header/Navbar";
+import Footer1 from "../footer/Footer1";
+import FooterLast from "../footer/FooterLast";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

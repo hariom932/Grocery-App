@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Home from "../components/Home";
+import About from "../mainPages/About";
+import Shop from "../mainPages/Shop";
+import Contact from "../mainPages/Contact";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -146,13 +150,43 @@ const Navbar = () => {
               }`}
             >
               <ul className="space-y-7 md:flex md:space-y-0 px-5 md:space-x-6 text-gray-500 font-normal">
-                <li className="cursor-pointer">Home ▾</li>
-                <li className="cursor-pointer">About Us</li>
-                <li className="cursor-pointer">Fruits & Vegetables</li>
-                <li className="cursor-pointer">Shop ▾</li>
-                <li className="cursor-pointer">Blog ▾</li>
-                <li className="cursor-pointer">FAQ</li>
-                <li className="cursor-pointer">Contact</li>
+                <li className="cursor-pointer"> 
+                  <NavLink to="/" element={<Home/>}>
+                    Home ▾
+                  </NavLink>
+                </li>
+                <li className="cursor-pointer">
+                  <NavLink to="/about" element={<About/>}>
+                    About Us
+                  </NavLink>
+                </li>
+                 <li className="cursor-pointer">
+                  <NavLink to="/shop" element={<Shop/>}>
+                    Fruits and Vegetables
+                  </NavLink>
+                </li>
+                 <li className="cursor-pointer">
+                  <NavLink to="/shop" element={<Shop/>}>
+                    Shop ▾
+                  </NavLink>
+                </li>
+
+                 <li className="cursor-pointer">
+                  <NavLink to="/shop" element={<Shop/>}>
+                    Blog ▾
+                  </NavLink>
+                </li>
+
+                 <li className="cursor-pointer">
+                  <NavLink to="/#" element={<About/>}>
+                    FAQ
+                  </NavLink>
+                </li>
+                 <li className="cursor-pointer">
+                  <NavLink to="/contact" element={<Contact/>}>
+                    Contact Us
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>

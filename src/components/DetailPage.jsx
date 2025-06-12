@@ -1,10 +1,10 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../header/Navbar";
 import Menu from "./Menu";
-import Footer1 from "./Footer1";
-import Footer2 from "./Footer2";
-import FooterLast from "./FooterLast";
+import Footer1 from "../footer/Footer1";
+import Footer2 from "../footer/Footer2";
+import FooterLast from "../footer/FooterLast";
 import Product from "./product";
 
 const DetailPage = () => {
