@@ -61,7 +61,7 @@ const Faqs = () => {
                   </div>
                 </div>
               </div>
-              <div class="mt-8">
+              <div class="mt-8 px-5 md:px-0">
                 <div class="text-xl font-semibold text-gray-800">
                   Ask us a question
                 </div>

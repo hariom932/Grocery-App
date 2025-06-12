@@ -27,7 +27,7 @@ const About = () => {
           {/* -----content start here======== */}
 
           <div className="w-full bg-white flex justify-center pt-12">
-            <div className="w-[74%] flex max-w-6xl bg-white">
+            <div className="w-[74%] flex flex-col lg:flex-row max-w-6xl bg-white">
               {/* image Section */}
               <div className="w-[90%] overflow-hidden mt-0">
                 <div className="overflow-hidden w-[100%] h-[100%]">
