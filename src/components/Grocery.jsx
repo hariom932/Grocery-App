@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Product from "./product";
+import Product from "./Product";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -42,7 +42,7 @@ const Grocery = () => {
     prevArrow: <Arrow />,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1524,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 3,
@@ -51,7 +51,16 @@ const Grocery = () => {
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 1324,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1150,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 2,
@@ -59,7 +68,7 @@ const Grocery = () => {
         },
       },
       {
-        breakpoint: 640,
+        breakpoint: 900,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 2,
@@ -197,9 +206,9 @@ const Grocery = () => {
         </div>
         {/* ---------------end text here------------ */}
         <div className="flex justify-center items-center w-full overflow-x-auto hide-scrollbar">
-          <div className="w-[75%] container mx-auto grid grid-cols-1 md:grid-cols-4  gap-1 overflow-x-auto hide-scrollbar ">
+          <div className="w-[75%] container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-1 overflow-x-auto hide-scrollbar ">
             {images.map((item, ind) => (
-              <Product key={ind} item={item} />
+              <Product key={ind} index={ind} item={item} />
             ))}
           </div>
         </div>
@@ -240,8 +249,8 @@ const Grocery = () => {
 
         {/* Second slider down of best view  */}
     <div className="w-full content-fit flex justify-center">
-        <div className=" container mt-5 flex justify-center items-center">
-          <div className="container w-[86%]">
+        <div className=" container mt-5 bg-amber-500 w-[73%] flex justify-center items-center">
+          <div className="container w-full">
             <Slider {...settings}>
               {images.map((item, ind) => (
                 <div className="container h-[400px] flex gap-2 border border-gray-200 bg-white">
@@ -286,7 +295,8 @@ const Grocery = () => {
                     {/* ----------------quantity update button end here-----------s */}
 
                     {/* ---------add to cart btn-----  */}
-                    <button className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
+                    <button
+                     className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
                       <ion-icon className="" name="cart-outline"></ion-icon>{" "}
                       <p>Add to cart</p>
                     </button>

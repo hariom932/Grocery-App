@@ -1,45 +1,139 @@
-import React, { useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Home from "../components/Home";
 import About from "../mainPages/About";
 import Shop from "../mainPages/Shop";
 import Contact from "../mainPages/Contact";
+import { MyCart } from "../App";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const [cartNumber, setCartNumber] = useState(0);
+  useEffect(()=>
+  {
+     setCartNumber(cartItems.length);
+  })
+
   const cartHandler = () => {
     setIsCartOpen(!isCartOpen);
-    console.log(isOpen);
   };
-  
+const {cartItems,setCartItems}=useContext(MyCart)
+
+  useEffect(() => {
+
+  cartItems.map((item,index)=>console.log(item))
+
+  if (isCartOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [isCartOpen]);
+
 
   return (
     <>
       <nav>
-        {/* Cart Div */}
+        {/* Backdrop Overlay */}
+        {isCartOpen && (
+          <div
+            onClick={cartHandler}
+            className="fixed inset-0 bg-black/60  z-10 transition-opacity duration-300"
+          ></div>
+        )}
+
+        {/* Slide-in Cart */}
         <div
           id="cart"
-          className={`container bg-white w-[25%] h-full absolute right-0 z-10 transition-all duration-300 ease-in-out ${
-            isCartOpen ? "block" : "hidden"
+          className={`container bg-[#EFF7FA] w-[25%] h-full fixed top-0 right-0 z-20 transform transition-transform duration-500 ease-in-out ${
+            isCartOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="h-15 bg-black flex justify-between items-center px-5 text-white font-medium">
-            <div>My Cart (0 items)</div>
-            <div onClick={cartHandler}>
-              <ion-icon
-                className="h-8 w-8 cursor-pointer"
-                name="close-circle"
-              ></ion-icon>
-            </div>
+            <div>My Cart ({cartNumber} items)</div>
+              <div onClick={cartHandler}>
+                <ion-icon className="h-9 w-9 cursor-pointer" name="close-circle"></ion-icon>
+              </div>
           </div>
+          
+     {/* // CartItem display container start here  */}
+        <div className="flex flex-col space-y-3.5 mt-4 items-center justify-center w-full relative overflow-auto">
+          
+           <div className="flex items-start p-4 bg-white rounded-sm shadow-md w-85 space-x-4">
+            {/* Image container */}
+            <div className="w-20 h-20 rounded overflow-hidden border border-gray-200">
+              <img
+                src=""
+                alt="cart image"
+                className="object-cover w-full h-full"
+              />
+            </div>
+
+            {/* Details box*/}
+            <div className="flex-1">
+              <div className="flex justify-between items-start">
+                <span className="text-[11px] px-2 py-0.5 rounded bg-green-50 text-green-600 font-semibold">
+                  59 % OFF
+                </span>
+
+                {/* Close Icon */}
+                <button className="text-gray-400 cursor-pointer text-[12px]">
+                  ✕
+                </button>
+              </div>
+
+              {/* Product Name */}
+              <h3 className="text-[#1abc9c] font-medium text-sm mt-1">
+                Green Seedless Grapes
+              </h3>
+
+              {/* Weight */}
+              <p className="text-xs text-black">- 1 kg</p>
+
+              {/* Price */}
+              <p className="text-sm font-bold mt-1">
+                1 × <span className="text-black">£4.99</span>
+              </p>
+            </div>
+
+            
+          </div>
+          
+       </div>
+
+        <div className="absolute bottom-0 w-full flex items-center justify-center bg-white">
+          <div className="w-85">
+          <div className="flex justify-between text-sm text-gray-500 font-semibold mt-2 mb-4 px-1">
+            <span>Subtotal</span>
+            <span className="text-black">£56.96</span>
+          </div>
+
+          <div className="flex flex-col space-y-3">
+            <button className="w-full py-3 rounded-xs bg-gradient-to-r from-[#f17557] to-[#f14114] text-white font-medium text-sm">
+              View cart
+            </button>
+            <button className="w-full py-3 mb-2 rounded-xs bg-gradient-to-r from-[#f17557] to-[#f14114] text-white font-medium text-sm">
+              Checkout
+            </button>
+          </div>
+         </div>
         </div>
 
-        {/* Navbar & Menu */}
+        {/* // CartItem display container end here */}
+    
+    
+     </div>
+
+
+        {/* Navbar Top */}
         <div className="w-full">
           <div className="flex flex-col items-center text-white bg-gradient-to-r from-[#040404] to-[#21262A] w-full py-4 text-[12px] md:flex-row justify-between px-4 md:py-3 2xl:px-50">
-            {/* Cashback Text */}
             <div className="text-sm flex gap-1 text-[12px] py-2 2xl:py-0">
               20% Cashback for all users | Code:{" "}
               <strong className="flex items-center pt-0.1">
@@ -49,28 +143,20 @@ const Navbar = () => {
                 </span>
               </strong>
             </div>
-
-            {/* Links */}
             <div>
               <ul className="flex gap-6">
                 <li className="relative">
-                  <div
-                    className="flex items-center gap-1 hover:cursor-pointer"
-                    onClick={() => setShowDropdown(!showDropdown)}
-                  >
+                  <div className="flex items-center gap-1 hover:cursor-pointer">
                     <ion-icon name="location-outline"></ion-icon>
                     Your location
                   </div>
                 </li>
                 <li className="flex items-center gap-1 hover:cursor-pointer">
-                  <ion-icon className="" name="lock-closed"></ion-icon>
+                  <ion-icon name="lock-closed"></ion-icon>
                   <Link to="/login">Sign In</Link>
                 </li>
                 <li className="flex items-center gap-1 hover:cursor-pointer">
-                  <ion-icon
-                    className=""
-                    name="person-circle-outline"
-                  ></ion-icon>
+                  <ion-icon name="person-circle-outline"></ion-icon>
                   <Link to="/login">Sign Up</Link>
                 </li>
               </ul>
@@ -78,8 +164,8 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Menu */}
-        <div className="w container max-w-full">
+        {/* Logo, Search, Cart */}
+        <div className="container max-w-full">
           <div className="w-full flex justify-center items-center">
             <div className="w-full">
               <div className="h-36 bg-gradient-to-r from-[#0FC7B4] to-[#28D695] relative flex justify-between lg:px-40 md:h-23">
@@ -112,13 +198,9 @@ const Navbar = () => {
                     onClick={() => setIsOpen(!isOpen)}
                     className="h-11 w-11 mt-5 mr-5 bg-white rounded-xs p-1 lg:hidden"
                   >
-                    <ion-icon
-                      className="text-4xl text-gray-400"
-                      name="menu-outline"
-                    ></ion-icon>
+                    <ion-icon className="text-4xl text-gray-400" name="menu-outline"></ion-icon>
                   </button>
                 </div>
-                {/* Mobile Menu Icon end here*/}
 
                 {/* Cart Icon */}
                 <div
@@ -127,13 +209,10 @@ const Navbar = () => {
                 >
                   <div className="relative">
                     <div className="h-11 w-11 bg-white rounded-full p-2 overflow-hidden">
-                      <ion-icon
-                        className="h-4 w-6 text-gray-700"
-                        name="cart"
-                      ></ion-icon>
+                      <ion-icon className="h-4 w-6 text-gray-700" name="cart"></ion-icon>
                     </div>
                     <span className="absolute bottom-3 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                      0
+                      {cartNumber}
                     </span>
                   </div>
                   <div className="hidden font-medium text-white text-sm xl:block">
@@ -143,49 +222,35 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="">
+
+          {/* Menu Links */}
+          <div>
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out md:flex md:space-x-6 mt-0 ${
                 isOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
               }`}
             >
               <ul className="space-y-7 md:flex md:space-y-0 px-5 md:space-x-6 text-gray-500 font-normal">
-                <li className="cursor-pointer"> 
-                  <NavLink to="/" element={<Home/>}>
-                    Home ▾
-                  </NavLink>
+                <li className="cursor-pointer">
+                  <NavLink to="/" element={<Home />}>Home ▾</NavLink>
                 </li>
                 <li className="cursor-pointer">
-                  <NavLink to="/about" element={<About/>}>
-                    About Us
-                  </NavLink>
+                  <NavLink to="/about" element={<About />}>About Us</NavLink>
                 </li>
-                 <li className="cursor-pointer">
-                  <NavLink to="/shop" element={<Shop/>}>
-                    Fruits and Vegetables
-                  </NavLink>
+                <li className="cursor-pointer">
+                  <NavLink to="/shop" element={<Shop />}>Fruits and Vegetables</NavLink>
                 </li>
-                 <li className="cursor-pointer">
-                  <NavLink to="/shop" element={<Shop/>}>
-                    Shop ▾
-                  </NavLink>
+                <li className="cursor-pointer">
+                  <NavLink to="/shop" element={<Shop />}>Shop ▾</NavLink>
                 </li>
-
-                 <li className="cursor-pointer">
-                  <NavLink to="/shop" element={<Shop/>}>
-                    Blog ▾
-                  </NavLink>
+                <li className="cursor-pointer">
+                  <NavLink to="/shop" element={<Shop />}>Blog ▾</NavLink>
                 </li>
-
-                 <li className="cursor-pointer">
-                  <NavLink to="/#" element={<About/>}>
-                    FAQ
-                  </NavLink>
+                <li className="cursor-pointer">
+                  <NavLink to="/#" element={<About />}>FAQ</NavLink>
                 </li>
-                 <li className="cursor-pointer">
-                  <NavLink to="/contact" element={<Contact/>}>
-                    Contact Us
-                  </NavLink>
+                <li className="cursor-pointer">
+                  <NavLink to="/contact" element={<Contact />}>Contact Us</NavLink>
                 </li>
               </ul>
             </div>
