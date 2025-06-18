@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Product from "./Product";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
+import { MyCart } from "../App";
 
 const Arrow = (props) => {
   const { className, style, onClick } = props;
+
+  const {cartItems,setCartItems}=useContext(MyCart)
+  
   return (
     <div
       className={className}
@@ -189,6 +193,19 @@ const Grocery = () => {
   }, []);
   // --------------------------Category API End here --------------------
 
+
+  function addToCart(item,index)
+  {
+    // var temp=[...cartItems]
+    // temp.push(item)
+    // setCartItems(temp)
+    console.log("grocery cart",index)
+  }
+  useEffect(()=>
+  {
+    addToCart()
+  },[])
+
   return (
     <>
       <div className="pb-9 pt-12 bg-[#EFF7FA] ">
@@ -252,7 +269,7 @@ const Grocery = () => {
         <div className=" container mt-5 bg-amber-500 w-[73%] flex justify-center items-center">
           <div className="container w-full">
             <Slider {...settings}>
-              {images.map((item, ind) => (
+              {images.map((item, index) => (
                 <div className="container h-[400px] flex gap-2 border border-gray-200 bg-white">
                   <div className="flex justify-between text-[11px] text-green-500 px-6 pt-5 z-10">
                     <p className="">17%</p>
@@ -296,9 +313,10 @@ const Grocery = () => {
 
                     {/* ---------add to cart btn-----  */}
                     <button
+                     onClick={()=>addToCart(item,index)}
                      className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
                       <ion-icon className="" name="cart-outline"></ion-icon>{" "}
-                      <p>Add to cart</p>
+                         Add to cart
                     </button>
                     {/* ---------add to cart btn end here-----  */}
                   </div>

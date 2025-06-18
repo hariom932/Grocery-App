@@ -9,6 +9,7 @@ import { MyCart } from "../App";
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [totalprice,setTotalprice]=useState(0)
 
   const [cartNumber, setCartNumber] = useState(0);
   useEffect(()=>
@@ -36,6 +37,30 @@ const {cartItems,setCartItems}=useContext(MyCart)
   };
 }, [isCartOpen]);
 
+//  function priceHandler()
+//     {   
+//         const t=0
+     
+//         cartItems.forEach((item)=>
+//         {
+           
+//             t=t+item.price
+//         }) 
+//         setTotalprice(t)
+//         console.log("total price",totalprice)
+//     }
+
+//     useEffect(()=>{
+//         priceHandler()
+//     },[cartItems])
+
+function removeHandler(index)
+{
+  const temp = [...cartItems]
+  temp.splice(index,1)
+  setCartItems(temp)
+  // console.log("Removed...")
+}
 
   return (
     <>
@@ -63,49 +88,53 @@ const {cartItems,setCartItems}=useContext(MyCart)
           </div>
           
      {/* // CartItem display container start here  */}
-        <div className="flex flex-col space-y-3.5 mt-4 items-center justify-center w-full relative overflow-auto">
-          
-           <div className="flex items-start p-4 bg-white rounded-sm shadow-md w-85 space-x-4">
-            {/* Image container */}
-            <div className="w-20 h-20 rounded overflow-hidden border border-gray-200">
-              <img
-                src=""
-                alt="cart image"
-                className="object-cover w-full h-full"
-              />
-            </div>
+     <div className="w-full flex flex-col items-center justify-center mt-4">
+        {cartItems.length === 0 ? (
+          <p className="text-black">Cart is empty.</p>
+        ) : (
+          <div className="flex flex-col space-y-3.5 max-h-[500px] overflow-y-auto w-full px-4">
+            {cartItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-start p-4 bg-white rounded-sm shadow-md w-85 space-x-4"
+              >
+                {/* Image container */}
+                <div className="w-20 h-20 rounded overflow-hidden border border-gray-200">
+                  <img
+                    src={item.image}
+                    alt="cart image"
+                    className="object-cover w-full h-full"
+                  />
+                </div>
 
-            {/* Details box*/}
-            <div className="flex-1">
-              <div className="flex justify-between items-start">
-                <span className="text-[11px] px-2 py-0.5 rounded bg-green-50 text-green-600 font-semibold">
-                  59 % OFF
-                </span>
+                {/* Details box */}
+                <div className="flex-1">
+                  <div className="flex justify-between items-start">
+                    <span className="text-[11px] px-2 py-0.5 rounded bg-green-50 text-green-600 font-semibold">
+                      59 % OFF
+                    </span>
 
-                {/* Close Icon */}
-                <button className="text-gray-400 cursor-pointer text-[12px]">
-                  ✕
-                </button>
+                    <button
+                      onClick={() => removeHandler(index)}
+                      className="text-gray-400 cursor-pointer text-[12px]"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <h3 className="text-[#1abc9c] font-medium text-sm mt-1">
+                    {item.name}
+                  </h3>
+                  <p className="text-xs text-black">- 1 kg</p>
+                  <p className="text-sm font-bold mt-1">
+                    1 × <span className="text-black">£{item.price}</span>
+                  </p>
+                </div>
               </div>
-
-              {/* Product Name */}
-              <h3 className="text-[#1abc9c] font-medium text-sm mt-1">
-                Green Seedless Grapes
-              </h3>
-
-              {/* Weight */}
-              <p className="text-xs text-black">- 1 kg</p>
-
-              {/* Price */}
-              <p className="text-sm font-bold mt-1">
-                1 × <span className="text-black">£4.99</span>
-              </p>
-            </div>
-
-            
+            ))}
           </div>
-          
-       </div>
+        )}
+      </div>
 
         <div className="absolute bottom-0 w-full flex items-center justify-center bg-white">
           <div className="w-85">

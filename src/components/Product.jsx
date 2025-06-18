@@ -16,7 +16,7 @@ const product = (props) => {
     var temp=[...cartItems]
     temp.push(item);
     setCartItems(temp);
-    console.log(index,item)
+    // console.log(index,item)
   }
 
   return (
