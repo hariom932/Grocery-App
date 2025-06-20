@@ -5,6 +5,9 @@ import About from "../mainPages/About";
 import Shop from "../mainPages/Shop";
 import Contact from "../mainPages/Contact";
 import { MyCart } from "../App";
+import BlogDetails from "../blog/BlogDetails";
+import BlogList from "../blog/BlogList";
+import Login from "../components/Login";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -277,23 +280,75 @@ function removeHandler(index)
               }`}
             >
               <ul className="space-y-7 md:flex md:space-y-0 px-5 md:space-x-6 text-gray-500 font-normal">
-                <li className="cursor-pointer">
-                  <NavLink to="/" element={<Home />}>Home ▾</NavLink>
-                </li>
+                   <li className="group cursor-pointer">
+                      <div className=" font-medium cursor-pointer">
+                        <NavLink to="/" className="pointer-events-none">Home ▾</NavLink>
+                      </div>
+
+                      {/* Submenu - hidden by default, shown on hover of parent */}
+                      <div className="hidden group-hover:block mt-2 space-y-2">
+                        <ul>
+                            <li className="px-4 py-2 bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                               <Link to="/home"><ion-icon name="chevron-forward-outline"></ion-icon>Home 1</Link>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                                <Link to="/home"><ion-icon name="chevron-forward-outline"></ion-icon>Home 2</Link>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                               <Link to="/home"><ion-icon name="chevron-forward-outline"></ion-icon>Home 3</Link>
+                            </li>
+                        </ul>
+                      
+                      </div>
+                   </li>
                 <li className="cursor-pointer">
                   <NavLink to="/about" element={<About />}>About Us</NavLink>
                 </li>
                 <li className="cursor-pointer">
                   <NavLink to="/shop" element={<Shop />}>Fruits and Vegetables</NavLink>
                 </li>
-                <li className="cursor-pointer">
-                  <NavLink to="/shop" element={<Shop />}>Shop ▾</NavLink>
-                </li>
-                <li className="cursor-pointer">
-                  <NavLink to="/shop" element={<Shop />}>Blog ▾
-                  
-                  </NavLink>
-                </li>
+               <li className="group cursor-pointer">
+                      <div className=" font-medium cursor-pointer">
+                        <NavLink to="/shop" className="pointer-events-none">Shop ▾</NavLink>
+                      </div>
+
+                      {/* Submenu - hidden by default, shown on hover of parent */}
+                      <div className="hidden group-hover:block mt-2 space-y-2">
+                        <ul>
+                            <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                               <Link><ion-icon name="chevron-forward-outline"></ion-icon>Product Grid</Link>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                                <Link><ion-icon name="chevron-forward-outline"></ion-icon>Product Details</Link>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                               <Link to="/login" element={<Login/>}><ion-icon name="chevron-forward-outline"></ion-icon>My Accoutn</Link>
+                            </li>
+                        </ul>
+                      
+                      </div>
+                   </li>
+
+                  <li className="group cursor-pointer">
+                      <div className=" font-medium cursor-pointer">
+                        <NavLink to="/" className="pointer-events-none">Blog ▾</NavLink>
+                      </div>
+
+                      {/* Submenu - hidden by default, shown on hover of parent */}
+                      <div className="hidden group-hover:block mt-2 space-y-2">
+                        <ul>
+                            <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                               <Link to="/bloglist" element={<BlogList/>}><ion-icon name="chevron-forward-outline"></ion-icon>Blog List</Link>
+                            </li>
+                            <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                                <Link to="/blogdetails" element={<BlogDetails/>}><ion-icon name="chevron-forward-outline"></ion-icon>Blog Details</Link>
+                            </li>
+                          
+                        </ul>
+                      
+                      </div>
+                   </li>          
+
                 <li className="cursor-pointer">
                   <NavLink to="/#" element={<About />}>FAQ</NavLink>
                 </li>
