@@ -144,10 +144,10 @@ function removeHandler(index)
           </div>
 
           <div className="flex flex-col space-y-3">
-            <button className="w-full py-3 rounded-xs bg-gradient-to-r from-[#f17557] to-[#f14114] text-white font-medium text-sm">
+            <button className="w-full py-3 rounded-xs bg-gradient-to-r from-[#f17557] to-[#f14114] text-white font-medium text-sm cursor-pointer">
               View cart
             </button>
-            <button className="w-full py-3 mb-2 rounded-xs bg-gradient-to-r from-[#f17557] to-[#f14114] text-white font-medium text-sm">
+            <button className="w-full py-3 mb-2 rounded-xs bg-gradient-to-r from-[#f17557] to-[#f14114] text-white font-medium text-sm cursor-pointer">
               Checkout
             </button>
           </div>
@@ -177,7 +177,24 @@ function removeHandler(index)
                 <li className="relative">
                   <div className="flex items-center gap-1 hover:cursor-pointer">
                     <ion-icon name="location-outline"></ion-icon>
-                    Your location
+                     {/* <label for="location">Your Location</label> */}
+                      <select name="location" id="location">
+                        <option value="" className="text-black">Your location</option>
+                        <option value="delhi" className="text-black">Delhi</option>
+                        <option value="indore" className="text-black">Indore</option>
+                        <option value="bhopal" className="text-black">Bhopal</option>
+                        <option value="ujjain" className="text-black">Ujjain</option>
+                        <option value="khajuraho"className="text-black">Khajuraho</option>
+                        <option value="gwalior" className="text-black">Gwalior</option>
+                        <option value="jabalpur" className="text-black">Jabalpur</option>
+                        <option value="pachmarhi" className="text-black">Pachmarhi</option>
+                        <option value="sanchi" className="text-black">Sanchi</option>
+                        <option value="orchha" className="text-black">Orchha</option>
+                        <option value="chanderi" className="text-black">Chanderi</option>
+                        <option value="mandu" className="text-black">Mandu</option>
+                        <option value="omkareshwar" className="text-black">Omkareshwar</option>
+                      </select>
+
                   </div>
                 </li>
                 <li className="flex items-center gap-1 hover:cursor-pointer">
@@ -273,7 +290,9 @@ function removeHandler(index)
                   <NavLink to="/shop" element={<Shop />}>Shop ▾</NavLink>
                 </li>
                 <li className="cursor-pointer">
-                  <NavLink to="/shop" element={<Shop />}>Blog ▾</NavLink>
+                  <NavLink to="/shop" element={<Shop />}>Blog ▾
+                  
+                  </NavLink>
                 </li>
                 <li className="cursor-pointer">
                   <NavLink to="/#" element={<About />}>FAQ</NavLink>

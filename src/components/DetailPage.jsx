@@ -5,7 +5,7 @@ import Menu from "./Menu";
 import Footer1 from "../footer/Footer1";
 import Footer2 from "../footer/Footer2";
 import FooterLast from "../footer/FooterLast";
-import Product from "./product";
+import Product from "./Product";
 
 const DetailPage = () => {
   const { state } = useLocation();

@@ -301,11 +301,11 @@ const Grocery = () => {
                     {/* ----------------quantity update button-----------s */}
 
                     <div className="h-11 mt-4 w-25 bg-[#FFF1F0] rounded-full flex justify-around items-center text-gray-500 md:w-35">
-                      <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center">
+                      <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
                         -
                       </button>
                       <p>1</p>
-                      <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center">
+                      <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
                         +
                       </button>
                     </div>
@@ -314,7 +314,7 @@ const Grocery = () => {
                     {/* ---------add to cart btn-----  */}
                     <button
                      onClick={()=>addToCart(item,index)}
-                     className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
+                     className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold cursor-pointer">
                       <ion-icon className="" name="cart-outline"></ion-icon>{" "}
                          Add to cart
                     </button>
