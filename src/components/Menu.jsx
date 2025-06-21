@@ -62,19 +62,24 @@ const Menu = () => {
               </li>
 
               <li className="relative group h-13 p-4 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] text-gray-600">
-                <a href="#" className=" hover:text-gray-200  flex items-center">
+                <div className="flex items-center cursor-pointer hover:text-gray-200">
                   Blog
                   <ion-icon className="w-3 h-3" name="caret-down-outline"></ion-icon>
-                     {/* Submenu */}
-                      <ul className="absolute left-0 top-full mt-1 bg-white text-black shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[160px] z-50">
-                          <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
-                            <Link to="/bloglist" element={<BlogList/>}><ion-icon name="chevron-forward-outline"></ion-icon>Blog List</Link>
-                          </li>
-                          <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
-                            <Link to="/blogdetails" element={<BlogDetails/>}><ion-icon name="chevron-forward-outline"></ion-icon>Blog Detail</Link>
-                          </li>
-                      </ul>
-                </a>
+                </div>
+
+                {/* Submenu */}
+                <ul className="absolute left-0 top-full mt-1 bg-white text-black shadow-md rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[160px] z-50">
+                  <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                    <Link to="/bloglist">
+                      <ion-icon name="chevron-forward-outline"></ion-icon> Blog List
+                    </Link>
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360] cursor-pointer text-gray-600">
+                    <Link to="/blogdetails">
+                      <ion-icon name="chevron-forward-outline"></ion-icon> Blog Detail
+                    </Link>
+                  </li>
+                </ul>
               </li>
 
               <li className="h-13 p-4 hover:bg-gradient-to-r from-[#f78367] to-[#FF6360]">

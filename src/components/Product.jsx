@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { MyCart } from "../App";
 
@@ -9,8 +9,6 @@ const product = (props) => {
   // importing cart setcart from App.jsx using content api 
   const {cartItems,setCartItems}=useContext(MyCart)
 
-
-
   function cartHandler(index,item)
   {
     var temp=[...cartItems]
@@ -18,6 +16,21 @@ const product = (props) => {
     setCartItems(temp);
     // console.log(index,item)
   }
+
+  // Quntity update 
+  const [quantity,setQuantity]=useState(1)
+
+  const increaseQtyHandler=(item)=>
+  {
+    setQuantity(quantity+1)
+  }
+
+  const decreaseQtyHandler = () => {
+  if (quantity > 1) {
+    setQuantity(quantity - 1);
+  }
+};
+
 
   return (
     <>
@@ -36,9 +49,9 @@ const product = (props) => {
             <div className="flex flex-col justify-between items-center">
               <div className="overflow-hidden">
                 <div className="h-45 w-45 object-cover transition-all duration-500 transform opacity-100 hover:scale-110 ">
-          <Link to="/detail" state={props}>
-                  <img src={props.item.image} alt="" />
-          </Link>
+            <Link to="/detail" state={props}>
+                    <img src={props.item.image} alt="" />
+            </Link>
 
 
                 </div>
@@ -49,7 +62,7 @@ const product = (props) => {
               </span>
               <span className="font-bold text-sm text-gray-400 mt-5">
                 <span>
-                  <del>$10.00 </del>
+                  <del>$15.00 </del>
                 </span>
                 <span className="font-bold text-black">
                   $ {props.item.price}
@@ -59,18 +72,22 @@ const product = (props) => {
               {/* ----------------quantity update button-----------s */}
 
               <div className="h-11 mt-4 w-25 bg-[#FFF1F0] rounded-full flex justify-around items-center text-gray-500 md:w-35">
-                <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
+                <button 
+                    onClick={()=>decreaseQtyHandler(props.item)}
+                    className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
                   -
                 </button>
-                <p>1</p>
-                <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
+                <p>{quantity}</p>
+                <button 
+                  onClick={()=>increaseQtyHandler(props.item)}
+                  className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
                   +
                 </button>
               </div>
               {/* ----------------quantity update button end here-----------s */}
 
               <button
-                onClick={()=>cartHandler(props.index,props.item)}
+                onClick={()=>cartHandler(props.index,props.item,)}
                className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold cursor-pointer">
                 <ion-icon className="" name="cart-outline"></ion-icon>{" "}
                   Add to cart
