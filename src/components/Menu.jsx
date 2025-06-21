@@ -34,7 +34,6 @@ const Menu = () => {
                   </li>
                 </ul>
               </li>
-
               <li className="h-13 p-4 hover:bg-gradient-to-r from-[#FF8E4D] to-[#FF6360]">
                 <Link to="/about">About Us</Link>
               </li>
