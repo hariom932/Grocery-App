@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Menu from "../../components/Menu";
-import FooterLast from "../../components/FooterLast";
-import Footer2 from "../../components/Footer2";
-import Footer1 from "../../components/Footer1";
+import Navbar from "../header/Navbar";
+import Menu from "../components/Menu";
+import FooterLast from "../footer/FooterLast";
+import Footer2 from "../footer/Footer2";
+import Footer1 from "../footer/Footer1";
 
 const About = () => {
   return (
@@ -27,7 +27,7 @@ const About = () => {
           {/* -----content start here======== */}
 
           <div className="w-full bg-white flex justify-center pt-12">
-            <div className="w-[74%] flex max-w-6xl bg-white">
+            <div className="w-[74%] flex flex-col lg:flex-row max-w-6xl bg-white">
               {/* image Section */}
               <div className="w-[90%] overflow-hidden mt-0">
                 <div className="overflow-hidden w-[100%] h-[100%]">

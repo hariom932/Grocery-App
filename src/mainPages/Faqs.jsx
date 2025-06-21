@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Menu from "../../components/Menu";
-import Footer1 from "../../components/Footer1";
-import Footer2 from "../../components/Footer2";
-import FooterLast from "../../components/FooterLast";
+import Navbar from "../header/Navbar";
+import Menu from "../components/Menu";
+import Footer1 from "../footer/Footer1";
+import Footer2 from "../footer/Footer2";
+import FooterLast from "../footer/FooterLast";
 
 const Faqs = () => {
   return (
@@ -61,7 +61,7 @@ const Faqs = () => {
                   </div>
                 </div>
               </div>
-              <div class="mt-8">
+              <div class="mt-8 px-5 md:px-0">
                 <div class="text-xl font-semibold text-gray-800">
                   Ask us a question
                 </div>

@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar from './Navbar'
+import Navbar from '../header/Navbar'
 import Menu from './Menu'
-import Slider1 from './Slider1'
-import Slider2 from './Slider2'
+import Slider1 from '../slider/Slider1'
+import Slider2 from '../slider/Slider2'
 import Grocery from './Grocery'
-import Footer1 from './Footer1'
-import Footer2 from './Footer2'
-import FooterLast from './FooterLast'
+import Footer1 from '../footer/Footer1'
+import Footer2 from '../footer/Footer2'
+import FooterLast from '../footer/FooterLast'
 
 const Home = () => {
   return (

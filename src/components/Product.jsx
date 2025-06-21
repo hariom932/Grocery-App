@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { MyCart } from "../App";
 
 const product = (props) => {
   // console.log(props.item);
+  // console.log(props.index);
+
+  // importing cart setcart from App.jsx using content api 
+  const {cartItems,setCartItems}=useContext(MyCart)
+
+
+
+  function cartHandler(index,item)
+  {
+    var temp=[...cartItems]
+    temp.push(item);
+    setCartItems(temp);
+    // console.log(index,item)
+  }
 
   return (
     <>
@@ -44,19 +59,21 @@ const product = (props) => {
               {/* ----------------quantity update button-----------s */}
 
               <div className="h-11 mt-4 w-25 bg-[#FFF1F0] rounded-full flex justify-around items-center text-gray-500 md:w-35">
-                <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center">
+                <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
                   -
                 </button>
                 <p>1</p>
-                <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center">
+                <button className="h-8 w-8 py-3 bg-white rounded-full flex justify-center items-center cursor-pointer">
                   +
                 </button>
               </div>
               {/* ----------------quantity update button end here-----------s */}
 
-              <button className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
+              <button
+                onClick={()=>cartHandler(props.index,props.item)}
+               className="h-8 w-26 mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold cursor-pointer">
                 <ion-icon className="" name="cart-outline"></ion-icon>{" "}
-                <p>Add to cart</p>
+                  Add to cart
               </button>
               {/* end  box */}
             </div>

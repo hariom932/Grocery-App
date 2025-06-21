@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "../header/Navbar";
 import Menu from "./Menu";
-import Footer2 from "./Footer2";
-import Footer1 from "./Footer1";
-import FooterLast from "./FooterLast";
+import Footer2 from "../footer/Footer2";
+import Footer1 from "../footer/Footer1";
+import FooterLast from "../footer/FooterLast";
 import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {

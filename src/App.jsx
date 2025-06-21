@@ -1,12 +1,15 @@
 import './App.css'
-import React, { useState } from 'react'
+import React, { createContext, useState } from 'react'
 import Routing from './components/Routing'
-import axios from 'axios'
 
+export const MyCart = createContext()
 function App() {
+  const [cartItems,setCartItems]=useState([])
    return (
     <>
+    <MyCart.Provider value={{cartItems,setCartItems}}>
       <Routing/>
+    </MyCart.Provider>
     </>
   )
 }
