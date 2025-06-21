@@ -7,6 +7,74 @@ import FooterLast from '../footer/FooterLast'
 import shoplogo from '../assets/img/shop1.jpg'
 
 const Shop = () => {
+
+    
+      const images = [
+    {
+      name: "Organic Sweet Corn",
+      inStock: true,
+      price: 14.99,
+      originalPrice: 19.99, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/7-1-170x185.jpg",
+    },
+    {
+      name: "Native Organic Papaya",
+      inStock: true,
+      price: 17.99,
+      originalPrice: 19.99, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/9-1-170x185.jpg",
+    },
+    {
+      name: "Green Shadesless Grapes",
+      inStock: true,
+      price: 11.99,
+      originalPrice: 19.99, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/11-1-170x185.jpg",
+    },
+    {
+      name: "Organic Grape Tomato",
+      inStock: true,
+      price: 7.99,
+      originalPrice: 19.99, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/12-1-170x185.jpg",
+    },
+    {
+      name: "Organic Broccoli",
+      inStock: true,
+      price: 5.49,
+      originalPrice: 19.99, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/1-1-170x185.jpg",
+    },
+    {
+      name: "Washed Sugar Snap Peas",
+      inStock: true,
+      price: 6.99,
+      originalPrice: 19.99, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/2-1-170x185.jpg",
+    },
+    {
+      name: "Organic Strawberry",
+      inStock: true,
+      price: 12.79,
+      originalPrice: 7.59, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/4-1-170x185.jpg",
+    },
+    {
+      name: "Organic Vegetable",
+      inStock: true,
+      price: 10.99,
+      originalPrice: 5.0, //
+      image:
+        "https://klbtheme.com/groci/wp-content/uploads/2018/08/5-1-170x185.jpg",
+    },
+  ];
   return (
    <>
     <Navbar/>
@@ -103,9 +171,10 @@ const Shop = () => {
                                 </div>
 
                                 {/* <!-- Products Grid --> */}
-                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                                    {/* <!-- Product Card --> */}
-                                  <div class="w-full bg-white border h-[370px] border-gray-100 md:w-[250px]">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                             {/* <!-- Product Card --> */}
+                                {images.map((item,index)=>
+                                  <div key={index} class="w-full bg-white border h-[370px] border-gray-100 md:w-[250px]">
                                     <div class="flex justify-between text-[11px] text-green-500 px-6 pt-5">
                                         <p>17%</p>
                                         <span class="h-5 w-5 border border-green-400 rounded flex justify-center items-center">
@@ -117,20 +186,20 @@ const Shop = () => {
                                         <div class="overflow-hidden">
                                         <div class="h-44 w-44 object-cover transition-all duration-500 transform hover:scale-110">
                                             <a href="detail.html">
-                                            <img src="/images/product.jpg" alt="Product" class="w-full h-full object-contain" />
+                                            <img src= {item.image} alt="Product" class="w-full h-full object-contain" />
                                             </a>
                                         </div>
                                         </div>
 
-                                        <p class="text-[#0CC5B7] font-bold mt-2">Organic Sweet Corn</p>
+                                        <p class="text-[#0CC5B7] font-bold mt-2">{item.name}</p>
 
                                         <span class="font-bold text-sm text-gray-400">
                                         In stock - <span class="font-medium">1 kg</span>
                                         </span>
 
                                         <span class="font-bold text-sm text-gray-400 mt-5">
-                                        <del>$10.00</del>
-                                        <span class="font-bold text-black ml-2">$8.50</span>
+                                        <del>${item.originalPrice}</del>
+                                        <span class="font-bold text-black ml-2">${item.price}</span>
                                         </span>
 
                                         {/* <div class="h-11 mt-4 w-[100px] bg-[#FFF1F0] rounded-full flex justify-around items-center text-gray-500 md:w-[140px]">
@@ -141,72 +210,12 @@ const Shop = () => {
 
                                         <button class="h-8 w-[110px] mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
                                         <ion-icon name="cart-outline"></ion-icon>
-                                        Add to cart
+                                            Add to cart
                                         </button>
                                     </div>
                                     </div>
+                                )}
 
-
-                                    {/* <!-- Product Card 2 --> */}
-                                  <div class="w-full bg-white border h-[370px]  border-gray-100 md:w-[250px]">
-                                    <div class="flex justify-between text-[11px] text-green-500 px-6 pt-5">
-                                        <p>17%</p>
-                                        <span class="h-5 w-5 border border-green-400 rounded flex justify-center items-center">
-                                        <div class="h-2 w-2 bg-green-500 rounded-full"></div>
-                                        </span>
-                                    </div>
-
-                                    <div class="flex flex-col justify-between items-center">
-                                        <div class="overflow-hidden">
-                                        <div class="h-44 w-44 object-cover transition-all duration-500 transform hover:scale-110">
-                                            <a href="detail.html">
-                                            <img src="/images/product.jpg" alt="Product" class="w-full h-full object-contain" />
-                                            </a>
-                                        </div>
-                                        </div>
-
-                                        <p class="text-[#0CC5B7] font-bold mt-2">Organic Sweet Corn</p>
-
-                                        <span class="font-bold text-sm text-gray-400">
-                                        In stock - <span class="font-medium">1 kg</span>
-                                        </span>
-
-                                        <span class="font-bold text-sm text-gray-400 mt-5">
-                                        <del>$10.00</del>
-                                        <span class="font-bold text-black ml-2">$8.50</span>
-                                        </span>
-
-                                        {/* <div class="h-11 mt-4 w-[100px] bg-[#FFF1F0] rounded-full flex justify-around items-center text-gray-500 md:w-[140px]">
-                                        <button class="h-8 w-8 bg-white rounded-full flex justify-center items-center">-</button>
-                                        <p>1</p>
-                                        <button class="h-8 w-8 bg-white rounded-full flex justify-center items-center">+</button>
-                                        </div> */}
-
-                                        <button class="h-8 w-[110px] mt-3 text-xs bg-[#FF8650] rounded-full text-white flex justify-center items-center gap-1 font-bold">
-                                        <ion-icon name="cart-outline"></ion-icon>
-                                        Add to cart
-                                        </button>
-                                    </div>
-                                  </div>
-
-
-                                    {/* <!-- Product Card 3 --> */}
-                                    <div class="bg-white p-4 rounded shadow relative">
-                                    <span class="absolute top-2 left-2 bg-green-100 text-green-700 px-2 text-sm font-medium rounded">34%</span>
-                                    <span class="absolute top-2 right-2 border-2 border-green-500 w-4 h-4 rounded-full bg-green-500"></span>
-                                    <img src="/path/to/papaya.png" alt="papaya" class="w-full h-32 object-contain" />
-                                        <h2 class="text-teal-600 font-semibold mt-4">Native Organic Papaya</h2>
-                                    <p class="text-gray-600 text-sm flex items-center gap-1">
-                                        <span class="text-green-500"><i class="fas fa-check-circle"></i></span> In Stock - 1 kg
-                                    </p>
-                                    <p class="mt-2 text-sm">
-                                        <span class="line-through text-gray-500">£15.00</span>
-                                        <span class="text-lg font-bold text-black ml-2">£9.99</span>
-                                    </p>
-                                    <button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded flex items-center gap-2">
-                                        <i class="fas fa-shopping-cart"></i> Add to cart
-                                    </button>
-                                    </div>
                                 </div>
                                 </div>
 
