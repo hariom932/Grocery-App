@@ -307,7 +307,6 @@ const Shop = () => {
                     </div>
                   </div>
                 </div>
-
                 {/* right side content end  here   */}
               </div>
             </div>
